@@ -1,0 +1,36 @@
+REPORT ZITAB_OP_3.
+TYPES: BEGIN OF ty_employee,
+         id TYPE i,
+         name TYPE string,
+       END OF ty_employee.
+
+DATA: lt_employees TYPE TABLE OF ty_employee,
+      ls_employee  TYPE ty_employee.
+
+* Adding a single line
+ls_employee-id = 1.
+ls_employee-name = 'John Doe'.
+APPEND ls_employee TO lt_employees.
+
+* Adding another line
+ls_employee-id = 2.
+ls_employee-name = 'Jane Smith'.
+APPEND ls_employee TO lt_employees.
+
+* Displaying the result
+write:/ 'table lt_employees data'.
+LOOP AT lt_employees INTO ls_employee.
+  WRITE: / ls_employee-id, ls_employee-name.
+ENDLOOP.
+
+DATA: lt_emp TYPE TABLE OF ty_employee,
+      lt_admin TYPE TABLE OF ty_employee.
+
+* Appending lines from one table to another
+APPEND LINES OF lt_employees TO lt_emp.
+
+* Displaying the result
+write:/ 'table lt_emp data'.
+LOOP AT lt_emp INTO ls_employee.
+  WRITE: / ls_employee-id, ls_employee-name.
+ENDLOOP.
